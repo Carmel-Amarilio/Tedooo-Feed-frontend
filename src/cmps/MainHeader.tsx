@@ -36,7 +36,7 @@ export const MainHeader: React.FC = () => {
                         </div>
                     </nav>
 
-                    <img className="user-img align-self-start" src={userImg} />
+                    <img className="profile-img align-self-start" src={userImg} />
                 </article>
             </section>
         </header>

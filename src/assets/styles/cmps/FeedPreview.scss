@@ -1,0 +1,70 @@
+.feed-preview {
+    display: grid;
+    grid-template-columns: 25px 1fr 25px;
+    background-color: $card-clr;
+    gap: 18px;
+    padding-block-start: 25px;
+    height: 753px;
+    border-radius: 2px;
+    margin-top: 24px;
+
+    >* {
+        grid-column: 2;
+    }
+
+    .user-details {
+
+        .user-name {
+            color: $title-txt-clr;
+        }
+
+        .shop-name {
+            color: $prominent-clr;
+        }
+
+        .date {
+            color: $nav-txt-clr;
+        }
+    }
+
+    .main-text {
+        font-size: em(14px);
+    }
+
+    .images {
+        grid-column: 1 /-1;
+        height: 517px;
+        gap: 8px;
+    }
+
+    .like-comments-details {
+
+        .like,
+        .comments {
+            gap: 8px;
+            color: $icon-clr;
+            font-size: em(14px);
+            font-weight: 400;
+        }
+    }
+
+    .like-comments-btn {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-block: 15px;
+        border-block-start: 1px solid $border-clr;
+
+        .like-btn,
+        .comments-btn {
+            gap: 8px;
+            color: $icon-txt-clr;
+            font-size: em(14px);
+            line-height: 22px;
+            cursor: pointer;
+        }
+
+        .active {
+            color: $prominent-clr;
+        }
+    }
+}
