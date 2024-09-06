@@ -1,0 +1,64 @@
+.main-header {
+    background-color: $header-clr;
+    padding-block-start: 10px;
+
+    .logo {
+        height: 40px;
+        width: 40px;
+
+    }
+
+    .search {
+        gap: 4px;
+        padding: 11px;
+        width: 216px;
+        background-color: $search-bgc;
+        border-radius: 2em;
+        cursor: text;
+
+        input {
+            height: 18px;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            height: max-content;
+
+            .icon {
+                height: 16px;
+                width: 16px;
+            }
+        }
+    }
+
+    nav {
+        div {
+            height: 48px;
+            border-block-end: 2px solid transparent;
+            padding-inline-end: 15px;
+            letter-spacing: -0.16px;
+            line-height: 24px;
+            font-weight: 500;
+            color: $icon-clr;
+            font-family: Poppins;
+            cursor: pointer;
+
+            &:hover {
+                border-color: $select-nav-txt-clr
+            }
+
+            &.select {
+                color: $select-nav-txt-clr;
+                border-color: $select-nav-txt-clr
+            }
+        }
+
+    }
+
+    .user-img {
+        width: 40px;
+        height: 40px;
+    }
+
+}

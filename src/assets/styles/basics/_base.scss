@@ -10,10 +10,9 @@ html {
 }
 
 body {
-    font-size: rem(18px);
+    font-size: rem(16px);
     margin: 0;
-    max-width: 1024px;
-    margin: auto;
+    background-color: $main-clr;
 }
 
 h1,
@@ -42,5 +41,15 @@ a {
 
     &:hover {
         text-decoration: underline;
+    }
+}
+
+input {
+    width: 100%;
+    border: transparent;
+    background-color: transparent;
+
+    &:focus {
+        outline: none;
     }
 }

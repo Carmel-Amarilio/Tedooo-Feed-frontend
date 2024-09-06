@@ -2,7 +2,7 @@
 @import "setup/variables";
 @import "setup/functions";
 @import "setup/mixins";
-@import "setup/typography";
+@import "setup/typography.css";
 @import "setup/animations.scss";
 
 // Basics
@@ -14,7 +14,8 @@
 
 
 // Views
-@import "views/Home";
+@import "views/FeedIndex.scss";
 
 
 // Components
+@import "cmps/MainHeader.scss";

@@ -65,6 +65,10 @@
         gap: 10px;
     }
 
+    &.gap12 {
+        gap: 12px;
+    }
+
     &.gap15 {
         gap: 15px;
     }
@@ -79,5 +83,9 @@
 
     &.gap30 {
         gap: 30px;
+    }
+
+    .align-self-start {
+        align-self: start;
     }
 }
