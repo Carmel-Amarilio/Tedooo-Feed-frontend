@@ -38,7 +38,7 @@
     .nav-container {
 
         nav {
-            div {
+            .nav-link {
                 height: 48px;
                 border-block-end: 2px solid transparent;
                 padding-inline-end: 15px;
@@ -52,7 +52,7 @@
                     border-color: $select-nav-txt-clr
                 }
 
-                &.select {
+                &.active {
                     color: $select-nav-txt-clr;
                     border-color: $select-nav-txt-clr
                 }

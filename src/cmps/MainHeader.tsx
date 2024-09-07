@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import logoImg from "../assets/img/logo.svg"
 import searchIcon from "../assets/img/icons/search.svg"
@@ -10,14 +10,14 @@ import userImg from "../assets/img/user.svg"
 import moreIcon from "../assets/img/icons/more.png"
 
 export function MainHeader(): React.ReactElement {
-    const location = useLocation()
-    const [route, setRoute] = useState<string>('')
+    // const location = useLocation()
+    // const [route, setRoute] = useState<string>('')
     const [isNav, setIsNav] = useState<boolean>(false)
 
-    useEffect(() => {
-        const route = location.pathname.split('/')[0]
-        setRoute(route ? route : 'home');
-    }, [])
+    // useEffect(() => {
+    //     const route = location.pathname.split('/')[0]
+    //     setRoute(route ? route : 'home');
+    // }, [])
 
     return (
         <header className="main-header main-container">
@@ -33,20 +33,20 @@ export function MainHeader(): React.ReactElement {
 
                 <article className="nav-container flex align-center">
                     <nav className={`flex align-center gap15 ${!isNav ? 'not-active' : ''}`}>
-                        <div className={`flex align-center gap10 ${route === 'home' ? 'select' : ''}`}>
+                        <NavLink className='nav-link flex align-center gap10 ' to="/" >
                             <img className="icon" src={homeIcon} />
-                            <p>Home</p>
-                        </div>
+                            Home
+                        </NavLink>
 
-                        <div className={`flex align-center gap10 ${route === 'messaging' ? 'select' : ''}`}>
+                        <NavLink className='nav-link flex align-center gap10 ' to="/messaging" >
                             <img className="icon" src={messagingIcon} />
-                            <p>Messaging</p>
-                        </div>
+                            Messaging
+                        </NavLink>
 
-                        <div className={`flex align-center gap10 ${route === 'notifications' ? 'select' : ''}`}>
+                        <NavLink className='nav-link flex align-center gap10 ' to="/notifications" >
                             <img className="icon" src={notificationsIcon} />
-                            <p>Notifications</p>
-                        </div>
+                            Notifications
+                        </NavLink>
                     </nav>
 
                     <div className="more-container flex align-center gap10">
