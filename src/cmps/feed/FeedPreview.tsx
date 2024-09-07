@@ -46,11 +46,14 @@ export function FeedPreview({ feed, isLastFeed, getFeeds, onViewsFeed, saveFeed 
         saveFeed(newFeed)
     }
 
+    function handleImageLoad(ev) {
+        ev.target.classList.remove('loading');
+    }
 
     return (
         <article className="feed-preview" ref={elRef}>
             <article className="user-details flex align-center gap12">
-                <img className="profile-img" src={avatar} />
+                <img className="profile-img loading" src={avatar} onLoad={handleImageLoad} />
                 <div className="">
                     <p className="user-name">{username}</p>
                     <p className="shop-name flex align-center gap5">{shopName}
@@ -64,7 +67,7 @@ export function FeedPreview({ feed, isLastFeed, getFeeds, onViewsFeed, saveFeed 
 
             <article className="images flex align-center justify-center" >
                 {Array.from({ length: (images.length > 1 ? 2 : 1) }).map((_, i) =>
-                    <img key={i} src={images[i]} />
+                    <img className="loading" key={i} src={images[i]} onLoad={handleImageLoad} />
                 )}
             </article>
 
