@@ -26,7 +26,8 @@ export function FeedList({ feeds, isLoading, getFeeds, saveFeed, onViewsFeed }: 
                 />
             ))}
 
-            {(!feeds.length || isLoading) && Array.from({ length: 3 }).map((_, i) => <FeedSkeleton key={i} />)}
+            {isLoading && Array.from({ length: 3 }).map((_, i) => <FeedSkeleton key={i} />)}
+            {!isLoading && !feeds.length && <h3 className="no-feeds-msg">Something happened, check internet connection</h3>}
 
         </section>
     );
