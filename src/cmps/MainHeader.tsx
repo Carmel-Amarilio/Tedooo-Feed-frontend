@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import logoImg from "../assets/img/logo.svg"
 import searchIcon from "../assets/img/icons/search.svg"
@@ -10,14 +10,7 @@ import userImg from "../assets/img/user.svg"
 import moreIcon from "../assets/img/icons/more.png"
 
 export function MainHeader(): React.ReactElement {
-    // const location = useLocation()
-    // const [route, setRoute] = useState<string>('')
     const [isNav, setIsNav] = useState<boolean>(false)
-
-    // useEffect(() => {
-    //     const route = location.pathname.split('/')[0]
-    //     setRoute(route ? route : 'home');
-    // }, [])
 
     return (
         <header className="main-header main-container">
