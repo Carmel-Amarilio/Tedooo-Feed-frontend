@@ -9,12 +9,14 @@ import { FeedIndex } from './views/FeedIndex'
 export function App(): React.ReactElement {
   return (
     <Router>
-      <MainHeader />
-      <main>
-        <Routes>
-          <Route element={<FeedIndex />} path="/" />
-        </Routes>
-      </main>
+      <section className='app'>
+        <MainHeader />
+        <main>
+          <Routes>
+            <Route element={<FeedIndex />} path="/" />
+          </Routes>
+        </main>
+      </section>
     </Router >
   )
 }

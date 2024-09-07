@@ -1,0 +1,48 @@
+.feed-skeleton {
+
+    .loader-txt,
+    .loader-img {
+        background-color: $lodeClr;
+        animation: loadingAnimation 2s infinite;
+    }
+
+    .loader-txt {
+        height: 15px;
+    }
+
+    .user-details {
+
+        .user-name,
+        .shop-name {
+            width: 100px;
+        }
+    }
+
+    .main-text {
+        :last-child {
+            width: 60%;
+        }
+    }
+
+    .images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .like-comments-details,
+    .like-comments-btn {
+
+        .like,
+        .comments,
+        .like-btn,
+        .comments-btn {
+            :first-child {
+                width: 15px;
+            }
+
+            :last-child {
+                width: 50px;
+            }
+        }
+    }
+}

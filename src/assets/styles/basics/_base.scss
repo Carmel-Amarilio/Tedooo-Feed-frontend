@@ -3,17 +3,24 @@
 }
 
 
-html {
+body {
+    margin: 0;
+}
+
+.app {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: auto 1fr;
+    background-color: $main-clr;
     font-size: rem(16px);
     color: $main-txt-clr;
     font-family: DM-Sans;
     font-weight: 500;
     line-height: 20px;
-}
 
-body {
-    margin: 0;
-    background-color: $main-clr;
+    main {
+        overflow: auto;
+    }
 }
 
 h1,

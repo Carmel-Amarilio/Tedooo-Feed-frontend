@@ -3,10 +3,10 @@
     grid-template-columns: 25px 1fr 25px;
     background-color: $card-clr;
     gap: 18px;
-    padding-block-start: 25px;
     height: 753px;
-    border-radius: 2px;
+    border-radius: 3px;
     margin-top: 24px;
+    padding-block-start: 25px;
 
     >* {
         grid-column: 2;
@@ -35,6 +35,10 @@
         grid-column: 1 /-1;
         height: 517px;
         gap: 8px;
+
+        img {
+            max-width: 50%;
+        }
     }
 
     .like-comments-details {

@@ -1,4 +1,3 @@
-import { observer } from "mobx-react"
 import { useEffect, useState } from "react";
 
 import { Feed } from "../models/models";
@@ -9,26 +8,29 @@ import { FeedList } from "../cmps/feed/FeedList";
 export function FeedIndex(): React.ReactElement {
     const [feeds, setFeeds] = useState<Feed[]>([])
     const [hasMore, setHasMore] = useState<boolean>(true)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [viewsFeed, setViewsFeed] = useState<string[]>([])
+
 
     useEffect(() => {
         getFeeds()
     }, [])
 
     async function getFeeds() {
+        if (!hasMore || isLoading) return
+        setIsLoading(true)
         try {
-            const { data, hasMore } = await feedService.query()
-            setFeeds(data)
+            const { data, hasMore } = await feedService.query(feeds.length)
+            setFeeds(prev => [...prev, ...data])
             setHasMore(hasMore)
+            setIsLoading(false)
         } catch (error) {
-
+            console.log('Something happened, cant load feeds');
+            setIsLoading(false)
         }
     }
 
-
-    async function onLike(feed: Feed) {
-        const { id, likes, didLike } = feed
-        const neeLikes = likes + (didLike ? -1 : 1)
-        const newFeed = { ...feed, likes: neeLikes, didLike: !didLike }
+    async function saveFeed(newFeed: Feed) {
         const oldFeeds = [...feeds]
         const newFeeds = feeds.map(currFeed => {
             if (currFeed.id === newFeed.id) return newFeed
@@ -36,19 +38,34 @@ export function FeedIndex(): React.ReactElement {
         })
         setFeeds(newFeeds)
         try {
-            const updateFeed = await feedService.save(newFeed)
+            await feedService.save(newFeed)
         } catch (error) {
-            console.log('Something happened, cant update the likes');
+            console.log('Something happened, cant update feeds');
             setFeeds(oldFeeds)
         }
+    }
 
+    async function onViewsFeed(id: string) {
+        if (viewsFeed.includes(id)) return
+        setViewsFeed(prev => [...prev, id])
+
+        // try {
+        //     await feedService.sendImpression(id)
+        // } catch (error) {
+        //     console.error('Error sending impression:', error);
+        // }
     }
 
     return (
         <section className="feed-index main-container">
-            {feeds.length ?
-                <FeedList feeds={feeds} onLike={onLike} /> :
-                <h1>loading...</h1>}
+            <FeedList
+                feeds={feeds}
+                isLoading={isLoading}
+                getFeeds={getFeeds}
+                onViewsFeed={onViewsFeed}
+                saveFeed={saveFeed}
+            />
+
         </section>
     )
 }

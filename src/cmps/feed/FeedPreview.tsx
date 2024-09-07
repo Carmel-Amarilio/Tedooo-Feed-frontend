@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { Feed } from "../../models/models";
+import { utilService } from "../../services/util.service";
 
 import likeGreenIcon from '../../assets/img/icons/like-green.svg';
 import likeBlueIcon from '../../assets/img/icons/like-blue.svg';
@@ -9,27 +10,52 @@ import commentIcon from '../../assets/img/icons/comment.svg';
 
 interface Props {
     feed: Feed;
-    onLike: (feed: Feed) => void;
+    isLastFeed: boolean;
+    getFeeds: () => void
+    onViewsFeed: (id: string) => void
+    saveFeed: (feed: Feed) => void;
 }
 
-export function FeedPreview({ feed, onLike }: Props) {
+export function FeedPreview({ feed, isLastFeed, getFeeds, onViewsFeed, saveFeed }: Props) {
 
     const { id, userId, username, avatar, shopName, shopId, images, comments, date, text, likes, didLike, premium } = feed
 
-    function formDate(data: string) {
-        return '1h'
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const elRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (observerRef.current) observerRef.current.disconnect()
+
+        observerRef.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                if (isLastFeed) getFeeds()
+                onViewsFeed(id)
+            }
+        })
+
+        if (elRef.current) observerRef.current.observe(elRef.current)
+
+        return () => {
+            if (observerRef.current) observerRef.current.disconnect()
+        }
+    })
+
+    async function onLike() {
+        const newLikes = likes + (didLike ? -1 : 1)
+        const newFeed = { ...feed, likes: newLikes, didLike: !didLike }
+        saveFeed(newFeed)
     }
 
 
     return (
-        <article className="feed-preview">
+        <article className="feed-preview" ref={elRef}>
             <article className="user-details flex align-center gap12">
                 <img className="profile-img" src={avatar} />
                 <div className="">
                     <p className="user-name">{username}</p>
                     <p className="shop-name flex align-center gap5">{shopName}
                         <span className="date">·</span>
-                        <span className="date">{formDate(date)}</span>
+                        <span className="date">{utilService.formDate(date)}</span>
                     </p>
                 </div>
             </article>
@@ -55,7 +81,7 @@ export function FeedPreview({ feed, onLike }: Props) {
             </article>
 
             <article className="like-comments-btn">
-                <div onClick={() => onLike(feed)} className={`like-btn flex align-center justify-center ${didLike ? 'active' : ''}`}>
+                <div onClick={onLike} className={`like-btn flex align-center justify-center ${didLike ? 'active' : ''}`}>
                     <img className='icon' src={didLike ? likeBlueIcon : likeIcon} />
                     <p>Like</p>
                 </div>
