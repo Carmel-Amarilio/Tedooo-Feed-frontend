@@ -1,11 +1,23 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import logoImg from "../assets/img/logo.svg"
 import searchIcon from "../assets/img/icons/search.svg"
 import homeIcon from '../assets/img/icons/home.svg';
 import messagingIcon from "../assets/img/icons/messaging.svg"
 import notificationsIcon from "../assets/img/icons/notifications.svg"
 import userImg from "../assets/img/user.svg"
+import moreIcon from "../assets/img/icons/more.png"
 
-export const MainHeader: React.FC = () => {
+export function MainHeader(): React.ReactElement {
+    const location = useLocation()
+    const [route, setRoute] = useState<string>('')
+
+    useEffect(() => {
+        const route = location.pathname.split('/')[0]
+        setRoute(route ? route : 'home');
+    }, [])
+
     return (
         <header className="main-header main-container">
             <section className="flex space-between align-center">
@@ -20,23 +32,25 @@ export const MainHeader: React.FC = () => {
 
                 <article className="flex align-center">
                     <nav className="flex align-center gap15">
-                        <div className="flex align-center gap10 select">
+                        <div className={`flex align-center gap10 ${route === 'home' ? 'select' : ''}`}>
                             <img className="icon" src={homeIcon} />
                             <p>Home</p>
                         </div>
 
-                        <div className="flex align-center gap10">
+                        <div className={`flex align-center gap10 ${route === 'messaging' ? 'select' : ''}`}>
                             <img className="icon" src={messagingIcon} />
                             <p>Messaging</p>
                         </div>
 
-                        <div className="flex align-center gap10">
+                        <div className={`flex align-center gap10 ${route === 'notifications' ? 'select' : ''}`}>
                             <img className="icon" src={notificationsIcon} />
                             <p>Notifications</p>
                         </div>
                     </nav>
-
-                    <img className="profile-img align-self-start" src={userImg} />
+                    <div className="more-container flex align-center gap10">
+                        <img className="more-icon icon" src={moreIcon} />
+                        <img className="profile-img align-self-start" src={userImg} />
+                    </div>
                 </article>
             </section>
         </header>
