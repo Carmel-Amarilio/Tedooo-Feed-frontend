@@ -23,7 +23,7 @@ export function MainHeader(): React.ReactElement {
         <header className="main-header main-container">
             <section className="flex space-between align-center">
 
-                <article className="flex align-center gap12 align-self-start">
+                <article className="logo-search-container flex align-center gap12 align-self-start">
                     <img src={logoImg} className="logo" />
                     <div className="search flex align-center">
                         <label htmlFor="search"><img className="icon" src={searchIcon}></img></label>
