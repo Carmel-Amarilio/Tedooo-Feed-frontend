@@ -12,6 +12,7 @@ import moreIcon from "../assets/img/icons/more.png"
 export function MainHeader(): React.ReactElement {
     const location = useLocation()
     const [route, setRoute] = useState<string>('')
+    const [isNav, setIsNav] = useState<boolean>(false)
 
     useEffect(() => {
         const route = location.pathname.split('/')[0]
@@ -30,8 +31,8 @@ export function MainHeader(): React.ReactElement {
                     </div>
                 </article>
 
-                <article className="flex align-center">
-                    <nav className="flex align-center gap15">
+                <article className="nav-container flex align-center">
+                    <nav className={`flex align-center gap15 ${!isNav ? 'not-active' : ''}`}>
                         <div className={`flex align-center gap10 ${route === 'home' ? 'select' : ''}`}>
                             <img className="icon" src={homeIcon} />
                             <p>Home</p>
@@ -47,8 +48,9 @@ export function MainHeader(): React.ReactElement {
                             <p>Notifications</p>
                         </div>
                     </nav>
+
                     <div className="more-container flex align-center gap10">
-                        <img className="more-icon icon" src={moreIcon} />
+                        <img onClick={() => setIsNav(!isNav)} className="more-icon icon" src={moreIcon} />
                         <img className="profile-img align-self-start" src={userImg} />
                     </div>
                 </article>

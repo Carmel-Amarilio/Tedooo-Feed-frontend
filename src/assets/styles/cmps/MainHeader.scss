@@ -32,27 +32,71 @@
         }
     }
 
-    nav {
-        div {
-            height: 48px;
-            border-block-end: 2px solid transparent;
-            padding-inline-end: 15px;
-            letter-spacing: -0.16px;
-            line-height: 24px;
-            color: $icon-clr;
-            font-family: Poppins;
-            cursor: pointer;
+    .nav-container {
 
-            &:hover {
-                border-color: $select-nav-txt-clr
+        nav {
+            div {
+                height: 48px;
+                border-block-end: 2px solid transparent;
+                padding-inline-end: 15px;
+                letter-spacing: -0.16px;
+                line-height: 24px;
+                color: $icon-clr;
+                font-family: Poppins;
+                cursor: pointer;
+
+                &:hover {
+                    border-color: $select-nav-txt-clr
+                }
+
+                &.select {
+                    color: $select-nav-txt-clr;
+                    border-color: $select-nav-txt-clr
+                }
             }
 
-            &.select {
-                color: $select-nav-txt-clr;
-                border-color: $select-nav-txt-clr
-            }
         }
 
+        .more-container {
+            .more-icon {
+                cursor: pointer;
+                display: none;
+            }
+        }
     }
+
+    @include for-normal-layout {
+        .nav-container {
+            position: relative;
+
+            .not-active {
+                display: none;
+            }
+
+            nav {
+                position: absolute;
+                flex-direction: column;
+                background-color: $search-bgc;
+                padding: 10px;
+                top: 60px;
+                right: 5px;
+            }
+
+
+            .more-container {
+                border: 2px solid $border-clr;
+                border-radius: 2em;
+                padding: 5px;
+
+                .more-icon {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    // @include for-narrow-layout {
+    //     width: 260px;
+    // }
 
 }
