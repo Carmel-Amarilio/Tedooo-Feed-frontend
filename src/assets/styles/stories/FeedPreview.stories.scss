@@ -1,0 +1,22 @@
+@import "../setup/variables";
+@import "../setup/typography";
+
+.feed-preview {
+    max-width: 1120px;
+    color: $main-txt-clr;
+    font-family: DM-Sans;
+    font-weight: 500;
+    line-height: 20px;
+
+    .images {
+
+        img {
+            max-width: 100%;
+
+            &.loading {
+                width: 100%;
+            }
+        }
+
+    }
+}

@@ -9,6 +9,9 @@ import notificationsIcon from "../assets/img/icons/notifications.svg"
 import userImg from "../assets/img/user.svg"
 import moreIcon from "../assets/img/icons/more.png"
 
+import './../assets/styles/main.scss'
+
+
 export function MainHeader(): React.ReactElement {
     const [isNav, setIsNav] = useState<boolean>(false)
 
