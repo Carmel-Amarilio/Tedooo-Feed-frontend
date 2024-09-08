@@ -34,7 +34,7 @@ export function FeedIndex(): React.ReactElement {
         const oldFeeds = [...feeds]
         const newFeeds = feeds.map(currFeed => {
             if (currFeed.id === newFeed.id) return newFeed
-            else return currFeed
+            return currFeed
         })
         setFeeds(newFeeds)
         try {
@@ -49,6 +49,7 @@ export function FeedIndex(): React.ReactElement {
         if (viewsFeed.includes(id)) return
         setViewsFeed(prev => [...prev, id])
 
+        //return CORS error
         // try {
         //     await feedService.sendImpression(id)
         // } catch (error) {

@@ -1,16 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import logoImg from "../assets/img/logo.svg"
-import searchIcon from "../assets/img/icons/search.svg"
-import homeIcon from '../assets/img/icons/home.svg';
-import messagingIcon from "../assets/img/icons/messaging.svg"
-import notificationsIcon from "../assets/img/icons/notifications.svg"
-import userImg from "../assets/img/user.svg"
-import moreIcon from "../assets/img/icons/more.png"
+import { homeIcon, logoImg, messagingIcon, moreIcon, notificationsIcon, searchIcon, userImg } from "../assets/img";
 
-import './../assets/styles/main.scss'
-
+import './../assets/styles/main.scss';
 
 export function MainHeader(): React.ReactElement {
     const [isNav, setIsNav] = useState<boolean>(false)

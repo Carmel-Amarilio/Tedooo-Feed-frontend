@@ -3,20 +3,16 @@ import { useEffect, useRef } from "react";
 import { Feed } from "../../models/models";
 import { utilService } from "../../services/util.service";
 
-import likeGreenIcon from '../../assets/img/icons/like-green.svg';
-import likeBlueIcon from '../../assets/img/icons/like-blue.svg';
-import likeIcon from '../../assets/img/icons/like.svg';
-import commentIcon from '../../assets/img/icons/comment.svg';
-
+import { commentIcon, likeBlueIcon, likeGreenIcon, likeIcon } from "../../assets/img";
 interface Props {
     feed: Feed;
-    isLastFeed: boolean;
-    getFeeds: () => void
-    onViewsFeed: (id: string) => void
+    isFeedToLoad: boolean;
+    getFeeds: () => void;
+    onViewsFeed: (id: string) => void;
     saveFeed: (feed: Feed) => void;
 }
 
-export function FeedPreview({ feed, isLastFeed, getFeeds, onViewsFeed, saveFeed }: Props) {
+export function FeedPreview({ feed, isFeedToLoad, getFeeds, onViewsFeed, saveFeed }: Props) {
 
     const { id, userId, username, avatar, shopName, shopId, images, comments, date, text, likes, didLike, premium } = feed
 
@@ -28,7 +24,7 @@ export function FeedPreview({ feed, isLastFeed, getFeeds, onViewsFeed, saveFeed 
 
         observerRef.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting) {
-                if (isLastFeed) getFeeds()
+                if (isFeedToLoad) getFeeds()
                 onViewsFeed(id)
             }
         })

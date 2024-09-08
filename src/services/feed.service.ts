@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { Feed } from '../models/models'
 
 
@@ -14,8 +15,9 @@ async function query(skip = 0): Promise<{ hasMore: boolean, data: Feed[] }> {
 }
 
 async function save(feed: Feed): Promise<Feed> {
-
+    //upsert function
     // send the new feed to the backend to update the DB
+
     // let newFeed: Feed
     // if (feed.id) newFeed = await axios.put(`https://api...`, feed)
     // else newFeed = await axios.post(`https://api...`, feed)
