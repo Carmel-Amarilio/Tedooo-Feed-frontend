@@ -42,17 +42,18 @@ export function FeedPreview({ feed, isFeedToLoad, getFeeds, onViewsFeed, saveFee
         saveFeed(newFeed)
     }
 
-    function handleImageLoad(ev) {
-        ev.target.classList.remove('loading');
+    function handleImageLoad(ev: React.SyntheticEvent<HTMLImageElement>) {
+        ev.currentTarget.classList.remove('loading');
     }
 
     return (
         <article className="feed-preview" ref={elRef}>
             <article className="user-details flex align-center gap12">
                 <img className="profile-img loading" src={avatar} onLoad={handleImageLoad} />
-                <div className="">
+                <div>
                     <p className="user-name">{username}</p>
-                    <p className="shop-name flex align-center gap5">{shopName}
+                    <p className="shop-name flex align-center gap5">
+                        {shopName}
                         <span className="date">·</span>
                         <span className="date">{utilService.formDate(date)}</span>
                     </p>
