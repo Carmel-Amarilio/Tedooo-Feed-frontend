@@ -6,7 +6,11 @@ import { homeIcon, logoImg, messagingIcon, moreIcon, notificationsIcon, searchIc
 import './../assets/styles/main.scss';
 
 export function MainHeader(): React.ReactElement {
-    const [isNav, setIsNav] = useState<boolean>(false)
+    const [isNavOpen, setIsNavOpen] = useState<boolean>(false)
+
+    function toggleNav() {
+        setIsNavOpen(!isNavOpen)
+    }
 
     return (
         <header className="main-header main-container">
@@ -21,7 +25,7 @@ export function MainHeader(): React.ReactElement {
                 </article>
 
                 <article className="nav-container flex align-center">
-                    <nav className={`flex align-center gap15 ${!isNav ? 'not-active' : ''}`}>
+                    <nav className={`flex align-center gap15 ${isNavOpen ? 'open' : ''}`}>
                         <NavLink className='nav-link flex align-center gap10 ' to="/" >
                             <img className="icon" src={homeIcon} />
                             Home
@@ -39,9 +43,11 @@ export function MainHeader(): React.ReactElement {
                     </nav>
 
                     <div className="more-container flex align-center gap10">
-                        <img onClick={() => setIsNav(!isNav)} className="more-icon icon" src={moreIcon} />
+                        <img onClick={toggleNav} className="more-icon icon" src={moreIcon} />
                         <img className="profile-img align-self-start" src={userImg} />
                     </div>
+
+                    <div className="nav-back" onClick={toggleNav}></div>
                 </article>
             </section>
         </header>

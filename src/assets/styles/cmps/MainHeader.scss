@@ -36,7 +36,6 @@
     }
 
     .nav-container {
-
         nav {
             .nav-link {
                 height: 48px;
@@ -66,6 +65,12 @@
                 display: none;
             }
         }
+
+        .nav-back {
+            position: absolute;
+            display: none;
+        }
+
     }
 
     @include for-normal-layout {
@@ -74,19 +79,19 @@
         }
 
         .nav-container {
-            position: relative;
 
-            .not-active {
-                display: none;
+            .open {
+                display: flex;
             }
 
             nav {
+                display: none;
                 position: absolute;
                 flex-direction: column;
                 background-color: $search-bgc;
                 padding: 10px;
-                top: 60px;
-                right: 5px;
+                top: 65px;
+                right: 10px;
                 z-index: 10;
             }
 
@@ -98,9 +103,21 @@
 
                 .more-icon {
                     display: block;
+                    z-index: 10;
                 }
             }
+
         }
+
+        &:has(.open) .nav-back {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 9;
+        }
+
     }
 
     @include for-narrow-layout {
