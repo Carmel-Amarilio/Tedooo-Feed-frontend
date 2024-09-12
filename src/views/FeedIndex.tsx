@@ -9,7 +9,7 @@ export function FeedIndex(): React.ReactElement {
     const [feeds, setFeeds] = useState<Feed[]>([])
     const [hasMore, setHasMore] = useState<boolean>(true)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [viewsFeed, setViewsFeed] = useState<string[]>([])
+    const [viewsFeed, setViewsFeed] = useState<{ [key: string]: boolean }>({})
 
 
     useEffect(() => {
@@ -46,8 +46,10 @@ export function FeedIndex(): React.ReactElement {
     }
 
     async function onViewsFeed(id: string) {
-        if (viewsFeed.includes(id)) return
-        setViewsFeed(prev => [...prev, id])
+        if (viewsFeed[id]) return
+        setViewsFeed(prev => ({ ...prev, [id]: true }))
+        console.log(id);
+
 
         //return CORS error
         // try {
