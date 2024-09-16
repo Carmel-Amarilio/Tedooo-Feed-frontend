@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { Feed } from "../models/models";
 import { feedService } from "../services/feed.service";
 
+import { loadFeeds, updateStay } from "../store/actions/feed.action";
+
 import { FeedList } from "../cmps/feed/FeedList";
 
 interface RootState {
@@ -16,27 +18,27 @@ interface RootState {
 
 export function FeedIndex(): React.ReactElement {
     const [feeds, setFeeds] = useState<Feed[]>([])
-    const [hasMore, setHasMore] = useState<boolean>(true)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [viewsFeed, setViewsFeed] = useState<{ [key: string]: boolean }>({})
 
     const feedsStore = useSelector((storeState: RootState) => storeState.feedModule.feeds);
-    const hasMoreStore = useSelector((storeState: RootState) => storeState.feedModule.hasMore);
+    const hasMore = useSelector((storeState: RootState) => storeState.feedModule.hasMore);
     console.log(feedsStore);
-
 
 
     useEffect(() => {
         getFeeds()
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        setFeeds(feedsStore)
+    }, [feedsStore]);
 
     async function getFeeds() {
         if (!hasMore || isLoading) return
         setIsLoading(true)
         try {
-            const { data, hasMore } = await feedService.query(feeds.length)
-            setFeeds(prev => [...prev, ...data])
-            setHasMore(hasMore)
+            await loadFeeds(feedsStore.length)
             setIsLoading(false)
         } catch (error) {
             console.log('Something happened, cant load feeds');
@@ -52,7 +54,7 @@ export function FeedIndex(): React.ReactElement {
         })
         setFeeds(newFeeds)
         try {
-            await feedService.save(newFeed)
+            await updateStay(newFeed)
         } catch (error) {
             console.log('Something happened, cant update feeds');
             setFeeds(oldFeeds)
