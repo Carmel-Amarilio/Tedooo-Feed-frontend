@@ -1,15 +1,29 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { Feed } from "../models/models";
 import { feedService } from "../services/feed.service";
 
 import { FeedList } from "../cmps/feed/FeedList";
 
+interface RootState {
+    feedModule: {
+        feeds: Feed[];
+        hasMore: boolean;
+    };
+}
+
+
 export function FeedIndex(): React.ReactElement {
     const [feeds, setFeeds] = useState<Feed[]>([])
     const [hasMore, setHasMore] = useState<boolean>(true)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [viewsFeed, setViewsFeed] = useState<{ [key: string]: boolean }>({})
+
+    const feedsStore = useSelector((storeState: RootState) => storeState.feedModule.feeds);
+    const hasMoreStore = useSelector((storeState: RootState) => storeState.feedModule.hasMore);
+    console.log(feedsStore);
+
 
 
     useEffect(() => {
@@ -48,8 +62,6 @@ export function FeedIndex(): React.ReactElement {
     async function onViewsFeed(id: string) {
         if (viewsFeed[id]) return
         setViewsFeed(prev => ({ ...prev, [id]: true }))
-        console.log(id);
-
 
         //return CORS error
         // try {

@@ -18,7 +18,7 @@ export function FeedList({ feeds, isLoading, getFeeds, saveFeed, onViewsFeed }: 
 
     return (
         <section className="feed-list">
-            {!!feeds.length && feeds.map((feed, i) => (
+            {feeds.map((feed, i) => (
                 <FeedPreview
                     key={feed.id}
                     feed={feed}
