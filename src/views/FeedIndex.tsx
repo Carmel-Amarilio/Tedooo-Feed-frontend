@@ -8,6 +8,7 @@ import { loadFeeds, updateStay } from "../store/actions/feed.action";
 
 import { FeedList } from "../cmps/feed/FeedList";
 
+const amountFeedInDOM = 12
 interface RootState {
     feedModule: {
         feeds: Feed[];
@@ -15,30 +16,32 @@ interface RootState {
     };
 }
 
-
 export function FeedIndex(): React.ReactElement {
     const [feeds, setFeeds] = useState<Feed[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [viewsFeed, setViewsFeed] = useState<{ [key: string]: boolean }>({})
+    const [page, setPage] = useState<number>(0)
+    const [maxPage, setMaxPage] = useState<number>(null)
 
-    const feedsStore = useSelector((storeState: RootState) => storeState.feedModule.feeds);
     const hasMore = useSelector((storeState: RootState) => storeState.feedModule.hasMore);
-    console.log(feedsStore);
+    console.log(feeds);
 
 
     useEffect(() => {
         getFeeds()
-    }, []);
+    }, [page]);
 
     useEffect(() => {
-        setFeeds(feedsStore)
-    }, [feedsStore]);
+        if (!hasMore && page > maxPage) setMaxPage(page)
+    }, [page, hasMore]);
+
 
     async function getFeeds() {
-        if (!hasMore || isLoading) return
+        if (isLoading) return
         setIsLoading(true)
         try {
-            await loadFeeds(feedsStore.length)
+            const feeds = await loadFeeds(page)
+            setFeeds(feeds)
             setIsLoading(false)
         } catch (error) {
             console.log('Something happened, cant load feeds');
@@ -73,12 +76,18 @@ export function FeedIndex(): React.ReactElement {
         // }
     }
 
+    function incPage(inc: number) {
+        if (isLoading) return
+        if (!!maxPage && page + inc > maxPage) return
+        setPage(prev => prev + inc > 0 ? prev + inc : 0)
+    }
+
     return (
         <section className="feed-index main-container">
             <FeedList
                 feeds={feeds}
                 isLoading={isLoading}
-                getFeeds={getFeeds}
+                incPage={incPage}
                 onViewsFeed={onViewsFeed}
                 saveFeed={saveFeed}
             />

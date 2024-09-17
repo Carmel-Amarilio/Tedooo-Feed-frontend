@@ -8,6 +8,8 @@
     margin-top: 24px;
     padding-block-start: 25px;
 
+    overflow-x: hidden;
+
     >* {
         grid-column: 2;
     }

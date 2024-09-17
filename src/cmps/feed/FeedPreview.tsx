@@ -6,13 +6,14 @@ import { utilService } from "../../services/util.service";
 import { commentIcon, likeBlueIcon, likeGreenIcon, likeIcon } from "../../assets/img";
 interface Props {
     feed: Feed;
-    isFeedToLoad: boolean;
-    getFeeds: () => void;
+    isFeedToLoadBottom: boolean;
+    isFeedToLoadTop: boolean;
+    incPage: (page: number) => void;
     onViewsFeed: (id: string) => void;
     saveFeed: (feed: Feed) => void;
 }
 
-export function FeedPreview({ feed, isFeedToLoad, getFeeds, onViewsFeed, saveFeed }: Props) {
+export function FeedPreview({ feed, isFeedToLoadBottom, isFeedToLoadTop, incPage, onViewsFeed, saveFeed }: Props) {
 
     const { id, userId, username, avatar, shopName, shopId, images, comments, date, text, likes, didLike, premium } = feed
 
@@ -24,7 +25,8 @@ export function FeedPreview({ feed, isFeedToLoad, getFeeds, onViewsFeed, saveFee
 
         observerRef.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting) {
-                if (isFeedToLoad) getFeeds()
+                if (isFeedToLoadBottom) incPage(1)
+                if (isFeedToLoadTop) incPage(-1)
                 onViewsFeed(id)
             }
         })

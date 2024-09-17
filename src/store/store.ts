@@ -9,7 +9,7 @@ declare global {
 }
 
 interface RootState {
-    // Add slices of state here
+    feedModule
 }
 
 const rootReducer = combineReducers<RootState>({
